@@ -1,0 +1,17 @@
+---
+- name: Install  Net-tools package
+  hosts: webservers
+  remote_user: ec2-user
+  become: true
+  tasks:
+   - name: Update 
+     yum:
+       name: "*"
+       state: latest
+   - name: install net-tools
+     yum: 
+         name: net-tools
+         state: latest
+         update_cache: true
+
+

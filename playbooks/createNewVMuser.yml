@@ -1,0 +1,13 @@
+---
+- name: Add user moomal with a specific uid and primary group admin
+  hosts: webservers
+  remote_user: ec2-user
+  become: true
+  tasks: 
+    - name: Add user moomal with a specific uid and primary group of 'admin'
+      ansible.builtin.user:
+         name: moomalq
+         comment: Moomal Qureshi
+         uid: 1040
+         password: 'xxx'
+         

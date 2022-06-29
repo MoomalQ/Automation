@@ -1,0 +1,26 @@
+---
+- name: Moving files from control node to remote server
+  hosts: webservers
+  remote_user: ec2-user
+  become: true
+  tasks: 
+   - name: Upgrade all packages on server
+     yum:
+       name: "*"
+       state: latest
+   - name: Create a directory if it does not exist 
+     ansible.builtin.file:
+       path: /etc/scripts
+       state: directory
+       mode: 755
+   - name: Copy file from control machine to VM 
+     copy:
+       src: /home/moomal/Pythoncodes/example1/python-script.py
+       dest: /etc/scripts/example1/python-script.py 
+   - name: Execute script
+     command: python /etc/scripts/example1/python-script.py
+     
+   - name: read file content
+     command: "cat /etc/scripts/example1/python-script.py"
+     register: out
+
